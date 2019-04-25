@@ -20,11 +20,13 @@ class ContactUtil {
     final dataBasesPath = await getDatabasesPath();
     final path = join(dataBasesPath, 'contacts.db');
 
+//    await deleteDatabase(path);
+
     return openDatabase(path, version: 1,
         onCreate: (Database db, int newVersion) async {
       await db.execute(
-          'CREATE TABLE ${Contact.contactTable} (${Contact.idColumn} INTEGER PRIMARY KEY, ${Contact.nameColumn} TEXT NOT NULL, ${Contact.emailColumn} TEXT NOT NULL, '
-          '${Contact.phoneColumn} TEXT NOT NULL, ${Contact.photoColumn} TEXT)');
+          'CREATE TABLE IF NOT EXISTS ${Contact.contactTable} (${Contact.idColumn} INTEGER PRIMARY KEY, ${Contact.nameColumn} TEXT NOT NULL, ${Contact.emailColumn} TEXT, '
+          '${Contact.phoneColumn} TEXT, ${Contact.photoColumn} TEXT)');
     });
   }
 
