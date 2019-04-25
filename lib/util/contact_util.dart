@@ -39,7 +39,7 @@ class ContactUtil {
   Future<List> findAll() async {
     Database dbContact = await db;
     List list =
-        await dbContact.rawQuery('SELECT * FROM ${Contact.contactTable}');
+        await dbContact.rawQuery('SELECT * FROM ${Contact.contactTable} ORDER BY ${Contact.nameColumn}');
     List<Contact> contacts = List();
 
     for (Map map in list) {
